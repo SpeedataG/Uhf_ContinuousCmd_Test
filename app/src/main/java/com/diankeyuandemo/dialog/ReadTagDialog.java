@@ -102,15 +102,15 @@ public class ReadTagDialog extends Dialog implements
             final int addr = Integer.parseInt(str_addr);
             final int count = Integer.parseInt(str_count);
             Status.setText("正在读卡中....");
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    int readArea = iuhfService.newReadArea(which_choose, addr, count, str_passwd);
-                    if (readArea != 0) {
-                        handler.sendMessage(handler.obtainMessage(1,"参数不正确"));
-                    }
-                }
-            }).start();
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+            int readArea = iuhfService.newReadArea(which_choose, addr, count, str_passwd);
+            if (readArea != 0) {
+                handler.sendMessage(handler.obtainMessage(1, "参数不正确"));
+            }
+//                }
+//            }).start();
 
         } else if (v == Cancle) {
             dismiss();

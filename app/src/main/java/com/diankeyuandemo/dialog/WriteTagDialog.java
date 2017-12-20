@@ -135,15 +135,15 @@ public class WriteTagDialog extends Dialog implements
             final int count = Integer.parseInt(str_count);
             Status.setText("正在写卡中....");
             isSuccess = false;
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
                     int writeArea = iuhfService.newWriteArea(which_choose, addr, count, str_passwd, write);
                     if (writeArea != 0) {
                         handler.sendMessage(handler.obtainMessage(1, "参数不正确"));
                     }
-                }
-            }).start();
+//                }
+//            }).start();
 
 //            int rev = iuhfService.write_area(which_choose, str_addr, str_passwd, str_count
 //                    , str_content);

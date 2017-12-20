@@ -50,6 +50,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 
+import io.reactivex.Observable;
+
 public class MainActivity extends Activity implements OnClickListener, OnSpdReadListener, OnSpdWriteListener {
     private static final String[] list = {"Reserved", "EPC", "TID", "USER"};
     private TextView Cur_Tag_Info;
@@ -369,6 +371,14 @@ public class MainActivity extends Activity implements OnClickListener, OnSpdRead
                 Toast.makeText(this, R.string.Status_No_Card_Select, Toast.LENGTH_SHORT).show();
                 return;
             }
+
+//            byte[] datas = iuhfService.read_area(2, 0, 6, "00000000");
+//            if (datas != null) {
+//                Log.i("zm", DataConversionUtils.byteArrayToString(datas));
+//                Log.i("zm", "读tid成功");
+//            }else {
+//                Log.d("zm", "读tid失败");
+//            }
             showInputDialog();
 
 
@@ -432,7 +442,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSpdRead
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        newEpc = editText.getText().toString() + "00";
+                        newEpc = editText.getText().toString() + "1111111111111111111100";
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -440,47 +450,50 @@ public class MainActivity extends Activity implements OnClickListener, OnSpdRead
                                     int sta = iuhfService.write_area(1, 2, 6,
                                             "00000000", DataConversionUtils.hexStringToByteArray(newEpc));
                                     if (sta == 0) {
-                                        Log.i("ddddd", "写epc成功");
+                                        Log.i("zm", "写epc成功");
                                         iuhfService.select_card(1, "", false);
                                         SystemClock.sleep(100);
                                         int res = iuhfService.select_card(1, newEpc, true);//重新选卡
                                         if (res == 0) {
-                                            Log.i("ddddd", "重新选卡成功");
+                                            Log.i("zm", "重新选卡成功");
+                                            SystemClock.sleep(500);
+//                                            int setlock = 0;
+                                            int setlock = iuhfService
+                                                    .setlock(1, 2, "00000000");
 //                                            lockUhfCard("lock");
-//                                if (res == 0) {
-//                                    Log.i("ddddd", "s锁卡成功");
-                                            byte[] datas = iuhfService.read_area(2, 0, 6, "00000000");
-                                            if (datas != null) {
-                                                Log.i("ddddd", DataConversionUtils.byteArrayToString(datas));
-                                                Log.i("ddddd", "读tid成功");
-                                                byte[] bytes = PsamUtil.result(datas);
-                                                if (bytes == null) {
-                                                    Log.i("ddddd", "psam失败");
-                                                    Toast.makeText(MainActivity.this, "获取校验数据失败", Toast.LENGTH_SHORT).show();
-                                                    return;
-                                                } else {
-                                                    Log.i("ddddd", DataConversionUtils.byteArrayToString(bytes) + "dddd" + bytes.length);
-                                                    Log.i("ddddd", "psam成功");
-                                                    SystemClock.sleep(100);
-                                                    res = iuhfService.write_area(3, 0, 10, "00000000", bytes);
+                                            if (setlock == 0) {
+                                                Log.i("zm", "s锁卡成功");
+                                                SystemClock.sleep(500);
+                                                byte[] datas = iuhfService.read_area(2, 0, 6, "00000000");
+                                                if (datas != null) {
+                                                    Log.i("zm", DataConversionUtils.byteArrayToString(datas));
+                                                    Log.i("zm", "读tid成功");
+                                                    byte[] bytes = PsamUtil.result(datas);
+                                                    if (bytes == null) {
+                                                        Log.i("zm", "psam失败");
+                                                        Toast.makeText(MainActivity.this, "获取校验数据失败", Toast.LENGTH_SHORT).show();
+                                                        return;
+                                                    } else {
+                                                        Log.i("zm", DataConversionUtils.byteArrayToString(bytes) + "dddd" + bytes.length);
+                                                        Log.i("zm", "psam成功");
+                                                        SystemClock.sleep(500);
+                                                        res = iuhfService.write_area(3, 0, 10, "00000000", bytes);
 
-                                                    Log.i("ddddd", "res" + res);
-                                                    if (res == 0) {
-                                                        Log.i("ddddd", "写user成功");
+                                                        Log.i("zm", "res" + res);
+                                                        if (res == 0) {
+                                                            Log.i("zm", "写user成功");
 //                                                    Toast.makeText(MainActivity.this, "chengggggg", Toast.LENGTH_SHORT).show();
+                                                        }
                                                     }
                                                 }
                                             }
-                                        }
 
-//                                }
+                                        }
 
                                     }
                                 }
                             }
-                        }).
-
-                                start();
+                        }).start();
 
 //                        writeUhfCard(1, 2, 6, DataConversionUtils.hexStringToByteArray(newEpc), "newEpc");
 
