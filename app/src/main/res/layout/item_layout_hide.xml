@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="65dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_change"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:background="#ee808080"
+        android:gravity="center"
+        android:text="修改"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:background="#88f91313"
+        android:gravity="center"
+        android:text="删除"
+        android:textColor="#ffffff" />
+</LinearLayout>

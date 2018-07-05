@@ -152,7 +152,7 @@ public class DataConvertUtil {
     }
 
     public static String getNowTime() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yymmddhhmm");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyMMddHHmm");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String Times = formatter.format(curDate);
         return Times;

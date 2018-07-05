@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">电科院</string>
+    <string name="app_name">标签发行认证</string>
 
     <string name="Search_Btn_T">选卡</string>
     <string name="Read_Btn_T">读</string>
@@ -51,8 +51,8 @@
     <string name="Item_New_EPC">新的EPC</string>
     <string name="Item_Lock_Area">Memory Space</string>
     <string name="Item_Lock_Action">Action</string>
-    <string name="Start_Search_Btn">开始</string>
-    <string name="Stop_Search_Btn">停止</string>
+    <string name="Start_Search_Btn">开始选卡</string>
+    <string name="Stop_Search_Btn">停止选卡</string>
     <string name="Status_Passwd_Length_Error">密码长度错误</string>
     <string name="Status_Content_Length_Error">内容长度错误</string>
     <string name="Status_Write_Error">写卡错误</string>

@@ -3,7 +3,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         minSdkVersion 15
@@ -105,17 +105,17 @@ bintray {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.0.2'
+    implementation 'com.android.support:appcompat-v7:26.0.2'
     //    compile 'com.android.support:appcompat-v7:23.4.0'
-    testCompile 'junit:junit:4.12'
-    provided 'com.speedata:deivice:1.4.8'
-    compile files('libs/R2K.jar')
-    compile files('libs/Module_Android_DemoPower_1.7.5.1.jar')
-    compile files('libs/ModuleAPI_J.jar')
+    testImplementation 'junit:junit:4.12'
+    compileOnly 'com.speedata:deivice:1.4.8'
+    implementation files('libs/R2K.jar')
+    implementation files('libs/Module_Android_DemoPower_1.7.5.1.jar')
+    implementation files('libs/ModuleAPI_J.jar')
 }
 
 //打包
